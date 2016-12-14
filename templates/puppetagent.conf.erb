@@ -27,6 +27,8 @@
     prerun_command=/etc/puppet/etckeeper-commit-pre
     postrun_command=/etc/puppet/etckeeper-commit-post
 <% end -%>
+    # use directory environments
+    environmentpath = $confdir/environments
 [agent]
     # The file in which puppetd stores a list of the classes
     # associated with the retrieved configuratiion.  Can be loaded in
@@ -72,3 +74,11 @@
   <% end -%>
   graph = true
 <% end -%>
+
+# Added by kian@thunder. Upstream module doesn't support a [master] section.
+[master]
+reports                  = puppetdb,hipchat
+storeconfigs             = true
+storeconfigs_backend     = puppetdb
+ssl_client_header        = SSL_CLIENT_S_DN
+ssl_client_verify_header = SSL_CLIENT_VERIFY
