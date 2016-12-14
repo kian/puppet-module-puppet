@@ -34,13 +34,14 @@ class puppet::agent (
   $etckeeper_hooks              = false,
 ) {
 
-  if versioncmp($::puppetversion, '3.0') > 0 {
+  if versioncmp($::puppetversion, '4.0') >= 0 {
     # puppet v4
     $default_config_path   = '/etc/puppetlabs/puppet/puppet.conf'
     $default_cron_command  = '/opt/puppetlabs/bin/puppet agent --onetime --ignorecache --no-daemonize --no-usecacheonfailure --detailed-exitcodes --no-splay'
     $default_puppet_binary = '/opt/puppetlabs/bin/puppet'
     $default_run_method    = 'cron'
     $is_puppet3            = false
+    fail('Puppet 4.x is not yet supported')
   } else {
     # puppet v3
     $default_config_path   = '/etc/puppet/puppet.conf'
